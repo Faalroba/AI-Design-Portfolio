@@ -1,0 +1,61 @@
+/* Scoped to the proposal so the existing portfolio pages retain their styling. */
+.proposal{--room-turquoise:#236c75;--room-gold:#8a641d}
+.proposal .detail-hero{padding-bottom:15px}
+.proposal h1{max-width:1100px}
+.proposal h1 em{color:#d95340}
+.proposal-tagline{font-family:Georgia,serif;font-style:italic;color:var(--purple);font-size:clamp(23px,2.5vw,32px);margin:22px 0}
+.proposal-status{display:inline-block;font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:30px;padding:9px 15px;margin:0 0 15px;background:#efe6f6}
+.proposal p{font-size:16px;line-height:1.8;max-width:76ch;margin:14px 0}
+.proposal .proposal-tagline{font-size:clamp(23px,2.5vw,32px)}
+.proposal .proposal-status{font-size:12px;line-height:1.5}
+.proposal h2{color:var(--purple);font-size:clamp(29px,3.2vw,42px);line-height:1.15;letter-spacing:-.045em}
+.proposal h3{font-size:22px;line-height:1.35;letter-spacing:-.025em;margin:30px 0 12px}
+.proposal-media{margin:32px 0 46px;min-width:0}
+.proposal-media .zoom{overflow:visible}
+.proposal-media img{display:block;width:100%;height:auto;object-fit:contain}
+.proposal-media figcaption{display:flex;justify-content:space-between;gap:12px 25px;flex-wrap:wrap;font-size:11px;line-height:1.65;color:#65546f;margin-top:13px}
+.proposal-media figcaption span:first-child{color:var(--purple)}
+.proposal-media figcaption a{text-decoration:underline;text-underline-offset:3px}
+.proposal-introduction{margin:55px 0 30px}
+.proposal-contents{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 24px;padding:22px 0;margin:34px 0 60px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proposal-contents a{font-size:12px;line-height:1.5;display:flex;gap:10px;align-items:baseline;padding:12px 0}
+.proposal-contents span{color:var(--room-gold);font-size:10px;flex-shrink:0}
+.proposal-contents a:hover{color:var(--purple);text-decoration:underline;text-underline-offset:4px}
+.proposal-section{margin:64px 0;scroll-margin-top:28px}
+.proposal-section-heading{display:flex;gap:18px;align-items:baseline;border-top:1px solid var(--line);padding-top:26px;margin-bottom:27px}
+.proposal-index{font-size:12px;color:var(--room-gold);letter-spacing:.1em;flex-shrink:0}
+.proposal-topic{min-width:0}
+.proposal-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 38px}
+.proposal-columns h3{margin-top:16px}
+.proposal-columns.moments,.proposal-columns.direction{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+.proposal-columns.moments{border-left:3px solid var(--room-gold);padding-left:25px;margin:25px 0 40px}
+.proposal-columns.moments p{font-size:15px}
+.proposal-links{display:flex;flex-wrap:wrap;gap:15px 28px;margin:25px 0 36px}
+.proposal-links a{color:var(--room-turquoise);font-size:14px;border-bottom:1px solid currentColor;padding-bottom:6px}
+.proposal-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;line-height:1.7;margin:24px 0 40px}
+.proposal-table caption{text-align:left;color:var(--room-turquoise);font-size:12px;padding-bottom:12px}
+.proposal-table th{text-align:left;background:#e7eff0;color:var(--ink);font-weight:600}
+.proposal-table td,.proposal-table th{padding:19px 22px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.conversation-excerpt{border:1px solid #b19ac3;border-radius:12px;padding:20px 26px;background:#f5edf7;margin:30px 0}
+.conversation-excerpt h3{font-size:17px;margin:0 0 10px;color:var(--purple)}
+.conversation-excerpt p{font-size:14px;margin:0}
+.conversation-excerpt .conversation-summary-label{font-size:11px;color:var(--purple);letter-spacing:.08em;text-transform:uppercase}
+.conversation-point{margin-top:20px}
+.conversation-point p+p{margin-top:6px}
+.proposal-rooms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin:35px 0}
+.proposal-rooms .proposal-topic{border-top:3px solid var(--pink)}
+.proposal-rooms .proposal-topic:nth-child(2){border-color:var(--room-turquoise)}
+.proposal-rooms .proposal-topic:nth-child(3){border-color:var(--room-gold)}
+.proposal-rooms h3{font-size:20px;margin-top:18px}
+.proposal-rooms p{font-size:15px}
+.wand-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 35px;margin:25px 0}
+.wand-actions div{border-top:1px solid var(--line);padding:20px 0;min-width:0}
+.wand-actions dt{color:var(--room-turquoise);font-weight:700;font-size:16px;margin-bottom:8px}
+.wand-actions dd{margin:0;font-size:15px;line-height:1.75}
+.development .proposal-topic{border-top:3px solid var(--room-gold);padding-top:10px}
+.development .proposal-topic+ .proposal-topic{border-color:var(--room-turquoise)}
+.proposal-return{display:inline-block;margin:0 0 35px}
+@media(max-width:900px){.proposal-contents{grid-template-columns:repeat(2,minmax(0,1fr))}.proposal-columns.moments,.proposal-columns.direction,.proposal-rooms{grid-template-columns:1fr}.proposal-columns.moments{gap:5px}.proposal-rooms{gap:18px}.proposal-rooms p,.proposal-columns.moments p{max-width:76ch}}
+@media(max-width:750px){.proposal .detail-hero{padding-bottom:0}.proposal h1{font-size:clamp(42px,9.5vw,68px)}.proposal p{font-size:15px;line-height:1.8}.proposal .proposal-tagline{font-size:24px}.proposal .proposal-status{font-size:11px}.proposal h3{font-size:20px}.proposal-section{margin:47px 0}.proposal-section-heading{gap:12px;margin-bottom:22px}.proposal-columns,.wand-actions{grid-template-columns:1fr;gap:12px}.proposal-media{margin:25px 0 35px}.proposal-contents{gap:0 18px;margin-bottom:45px}.proposal-contents a{font-size:11px}.proposal-table{font-size:13px;line-height:1.65}.proposal-table th,.proposal-table td{padding:12px 10px}.conversation-excerpt{padding:19px}.proposal .conversation-excerpt p{font-size:14px}.proposal-media figcaption{font-size:10px;gap:4px}.proposal-introduction{margin-top:40px}}
+
+.conversation-summary{margin-top:24px}.conversation-summary h4{font-family:"Space Grotesk",Arial,sans-serif;font-size:17px;line-height:1.5;color:var(--purple);margin:0 0 10px}
