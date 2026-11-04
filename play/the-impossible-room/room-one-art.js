@@ -1,0 +1,28 @@
+function drawRoomOne(){
+ const cool=state.reality==='cool',done=state.completed.includes('mirror');
+ const stone=cool?'#385e82':'#8c5984',light=cool?'#71d4e1':'#e69cc4',dark=cool?'#213657':'#533451',floor=cool?'#427b91':'#ae7b97',glow=cool?'#91e8ee':'#f8c0e5';
+ const mirror=mirrorArt();
+ const clue= cool?hotspot('clue','Investigate the marks beneath the moved table','info',`<g class="clue"><path d="M504 402l93 37 -43 24 -94 -38Z" fill="#25364b" stroke="#d3bc85"/><text x="0" y="0" transform="translate(497 423) matrix(1 .4 -1 .55 0 0)" font-size="25" fill="#ffe7a7" font-family="Georgia">☾ ◇ ✦</text></g>`,`<path class="halo" d="M504 398l100 41 -50 30 -102 -44Z"/>`):'';
+ const tx=cool?650:485,ty=cool?375:397;
+ const table=hotspot('table','Examine the table','info',`<path d="M${tx-30} ${ty+8}v53m60-46v54" stroke="#c8a269" stroke-width="8"/><ellipse cx="${tx}" cy="${ty}" rx="68" ry="27" fill="${light}" stroke="#e6c98f" stroke-width="3"/><ellipse cx="${tx}" cy="${ty}" rx="51" ry="18" fill="none" stroke="#bb9d70"/><path d="M${tx-12} ${ty-6}l22 7 -12 8 -22 -7Z" fill="#d8bbd8"/>`,`<ellipse class="halo" cx="${tx}" cy="${ty}" rx="73" ry="32"/>`);
+ const chair=cool?'':hotspot('chair','Examine the crescent chair','info',`<path d="M625 408Q578 426 613 463Q647 490 669 443Q637 465 625 408Z" fill="#7c538d" stroke="#e3be77" stroke-width="4"/><path d="M616 463v13m34-11v14" stroke="#c8a269" stroke-width="5"/>`,`<ellipse class="halo" cx="635" cy="445" rx="42" ry="43"/>`);
+ const cabinet=hotspot('cabinet',state.cabinet?'Examine the open cabinet':'Examine the three-symbol cabinet','interact',`<path d="M694 328l54 -26 45 20 -54 27Z" fill="${light}" stroke="#c8ad82"/><path d="M694 328l45 21v82l-45 -23Z" fill="${stone}" stroke="#c8ad82"/><path d="M739 349l54 -27v81l-54 28Z" fill="${state.cabinet?'#191b35':dark}" stroke="#c8ad82"/>
+ ${state.cabinet?'':`<g transform="translate(748 366) skewY(-25)"><text fill="#e9c987" font-size="14" font-family="Georgia">◇ ◇ ◇</text><path d="M7 17H27" stroke="#bba079"/></g>`}` ,`<path class="halo" d="M691 326l57 -29 49 23v85l-58 30 -48 -24Z"/>`);
+ const shard="";
+ $('#stage').innerHTML=`<svg viewBox="0 0 1000 590" aria-label="${cool?'Alternate':'Original'} reality: a floating isometric room with a mirror, table and cabinet"><defs>
+ <linearGradient id="wall" x2="1" y2="1"><stop stop-color="${stone}"/><stop offset="1" stop-color="${dark}"/></linearGradient><linearGradient id="ground" x2="0" y2="1"><stop stop-color="${light}"/><stop offset="1" stop-color="${floor}"/></linearGradient><radialGradient id="aura"><stop stop-color="${glow}" stop-opacity=".25"/><stop offset="1" stop-color="${glow}" stop-opacity="0"/></radialGradient><linearGradient id="mirrorFill" x2=".9" y2="1"><stop stop-color="${cool?'#74cfe7':'#b68acc'}"/><stop offset=".5" stop-color="#6e5ca7"/><stop offset="1" stop-color="#e7bded"/></linearGradient><filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="tiles" width="65" height="65" patternUnits="userSpaceOnUse" patternTransform="matrix(1 .42 -1 .5 500 280)"><rect width="65" height="65" fill="none" stroke="#e4c4d1" stroke-opacity=".24"/></pattern></defs>
+ <ellipse cx="500" cy="510" rx="375" ry="58" fill="url(#aura)"/><circle cx="285" cy="250" r="180" fill="url(#aura)"/>
+ <path d="M165 382L500 240L842 382L500 536Z" fill="${dark}" stroke="#7c6089"/><path d="M165 382V415L500 566V536Z" fill="#3c2a50"/><path d="M500 536V566L842 412V382Z" fill="#29283f"/>
+ <path d="M165 382V160L500 27V240Z" fill="url(#wall)" stroke="#a885a7" stroke-width="3"/><path d="M500 27L842 172V382L500 240Z" fill="url(#wall)" stroke="#9d7c9f" stroke-width="3"/>
+ <g fill="none" stroke="#c6a684" stroke-opacity=".35">${[80,125,170,215,260,305].map(y=>`<path d="M165 ${y+130}L500 ${y-3}L842 ${y+142}"/>`).join('')}<path d="M190 150V368M475 45V249M523 48V250M816 163V370" stroke-width="7"/></g>
+ <path d="M165 382L500 240L842 382L500 536Z" fill="url(#ground)"/><path d="M165 382L500 240L842 382L500 536Z" fill="url(#tiles)"/><path d="M187 381L500 250L819 382L500 523Z" fill="none" stroke="#e4c78e" stroke-opacity=".7"/>
+ <ellipse cx="514" cy="422" rx="161" ry="64" fill="${cool?'#304a75':'#784460'}" stroke="#cba975" stroke-width="2"/><ellipse cx="514" cy="422" rx="149" ry="57" fill="none" stroke="#c9a680" opacity=".6"/>
+ <path d="M555 261V139Q580 100 602 157V283Z" fill="#9eb5e2" stroke="#c5a97d" stroke-width="5"/><path d="M577 123V272M555 196L602 216" stroke="#c5a97d" stroke-width="2"/><path d="M558 261L601 280L614 276L569 257Z" fill="#d4b1c2"/>
+ ${mirror}${clue}${table}${chair}${cabinet}${shard}
+ ${roomExit(652,173,48,143,1)}
+ ${hotspot('ornament','Examine the floating ornament','info',`<path d="M${cool?433:403} 179l13 24 -13 23 -13 -24Z" fill="${glow}" stroke="#e6c98f"/><path d="M${cool?433:403} 179v47" stroke="#fff3d1"/>`, `<circle class="halo" cx="${cool?433:403}" cy="202" r="28"/>`)}
+ <g stroke="#d7b777" fill="none"><path d="M174 380V344M833 382V347" stroke-width="7"/></g>${star(174,339,13)}${star(833,341,13)}
+ ${hotspot('map','Return to the starting platform','move',`<path d="M451 518L503 540L470 556L418 534Z" fill="#826385" stroke="#e1c58b"/><path d="M418 534v13l52 23v-14M470 556v14l33-17v-13" fill="#4a365e" stroke="#a98e84"/><path d="M455 534l-9 4 14 6m-14-6h28" fill="none" stroke="#f5dda6" stroke-width="2"/>`,`<ellipse class="halo" cx="461" cy="540" rx="53" ry="24"/>`)}
+ <g fill="#ebd2ff" opacity=".65">${[0,1,2,3,4,5,6,7].map(n=>`<circle cx="${140+n*109}" cy="${100+(n*71)%360}" r="${n%2+1}"/>`).join('')}</g></svg>`;
+
+}
