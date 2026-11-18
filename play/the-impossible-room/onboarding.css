@@ -2,14 +2,13 @@
 .touch-instructions .mouse-copy { display: none; }
 .touch-instructions .touch-copy { display: inline; }
 
-#world { min-height: 1000px; }
+#world { min-height: 1000px; height: auto; padding-bottom: 155px; }
 .world-guide {
-  position: absolute;
-  left: 5vw;
-  width: min(980px, calc(100% - 10vw));
-  bottom: 145px;
+  position: relative;
+  width: min(430px, calc(100% - 10vw));
+  margin: 24px 0 0 5vw;
   z-index: 2;
-  padding: 22px 0;
+  padding: 0;
   text-shadow: 0 1px 4px #090516, 0 2px 12px #090516aa;
 }
 .world-copy p.welcome-introduction {
@@ -20,7 +19,9 @@
   font-weight: 500;
   text-shadow: 0 2px 5px #090516, 0 0 15px #090516bb;
 }
-.world-entry { position: absolute; left: 5vw; bottom: 145px; z-index: 3; }
+.world-entry { position: absolute; left: calc(5vw + 480px); bottom: 155px; z-index: 3; }
+.world-guide .welcome-sections { grid-template-columns: 1fr; gap: 24px; }
+.world-guide .welcome-sections > section + section { border: none; padding: 0; }
 .welcome-sections { display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; text-align: left; }
 .welcome-sections h2, .controls-help h2 {
   margin: 0 0 12px;
@@ -67,12 +68,8 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
 .controls-help .eyebrow { margin-bottom: 14px; }
 #close-help { font-size: 16px; }
 
-@media (max-width: 1100px) {
-  #world { height: auto; padding-bottom: 155px; }
-  .world-entry { position: relative; left: auto; bottom: auto; margin: 28px 5vw 0; }
-  .world-guide { position: relative; left: auto; right: auto; bottom: auto; width: auto; margin: 24px 5vw 0; }
-}
 @media (max-width: 750px) {
+  .world-entry { position: relative; left: auto; bottom: auto; margin: 28px 5vw 0; }
   .world-copy p.welcome-introduction { font-size: 20px; }
   .world-guide .welcome-sections p, .world-guide .controls-list { font-size: 18px; }
   .world-guide .welcome-sections h2 { font-size: 24px; }
