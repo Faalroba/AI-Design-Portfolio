@@ -16,6 +16,7 @@
   let phase = 'inactive';
   let shifted = false;
   let investigated = false;
+  let introduced = false;
   let promptTimer;
   let dismissTimer;
 
@@ -85,14 +86,14 @@
     closeTutorial();
     shifted = false;
     investigated = false;
+    introduced = false;
     help.close();
-    if (!welcome.open) welcome.showModal();
-    welcome.querySelector('.welcome-content').scrollTop = 0;
+    welcome.hidden = false;
   }
 
   function startIntroduction() {
-    welcome.close();
-    enter(0);
+    if (introduced || state.view !== 'room' || state.room !== 0) return;
+    introduced = true;
     phase = 'wand';
     paintTutorial();
     promptTimer = window.setTimeout(() => {
@@ -102,11 +103,11 @@
     }, 2400);
   }
 
-  document.querySelector('#start-game').addEventListener('click', startIntroduction);
+  document.querySelector('#begin').addEventListener('click', startIntroduction);
+  document.querySelector('#room1').addEventListener('click', startIntroduction);
   document.querySelector('#skip-tutorial').addEventListener('click', closeTutorial);
   document.querySelector('#help').addEventListener('click', () => help.showModal());
   document.querySelector('#close-help').addEventListener('click', () => help.close());
-  welcome.addEventListener('cancel', event => event.preventDefault());
 
   // Capture before SVG hotspots stop propagation, then inspect the result of their action.
   function observeInteraction(event) {

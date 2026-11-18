@@ -2,57 +2,37 @@
 .touch-instructions .mouse-copy { display: none; }
 .touch-instructions .touch-copy { display: inline; }
 
-dialog.welcome-screen {
-  width: min(1020px, calc(100vw - 48px));
-  max-height: calc(100dvh - 40px);
-  padding: clamp(26px, 4vw, 48px);
-  border: 1px solid #d9bc7c99;
-  border-radius: 12px;
-  background: linear-gradient(140deg, #241b38f5, #17142af5);
-  box-shadow: 0 16px 100px #09051699, inset 0 0 50px #c4a1f509;
-  overflow: auto;
+.world-guide {
+  position: absolute;
+  left: max(34%, 510px);
+  right: 4%;
+  bottom: 145px;
+  z-index: 2;
+  padding: 22px 26px;
+  border: 1px solid #d9bc7c88;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #251d36eb, #191529ed);
+  box-shadow: 0 8px 35px #09051644;
+  backdrop-filter: blur(8px);
 }
-.welcome-screen::backdrop {
-  background: linear-gradient(#100c22a8, #100c22bd), url('assets/world-opening.webp') center / cover;
-  backdrop-filter: blur(1px);
-}
-.welcome-screen[open] { display: flex; flex-direction: column; }
-.welcome-content { min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: #bca06c #292139; }
-.welcome-actions { flex-shrink: 0; }
-.welcome-screen h1 {
-  margin: 16px auto 24px;
-  max-width: 850px;
-  color: var(--cream);
-  font: clamp(30px, 4vw, 55px)/1.15 Georgia, serif;
-  letter-spacing: .08em;
-}
-.welcome-screen .welcome-introduction {
-  max-width: 720px;
-  margin: 0 auto 30px;
-  color: #e0d5e8;
-  font-size: 17px;
-  line-height: 1.75;
-}
-.welcome-screen h1:focus, .controls-help h2:focus { outline: none; }
-.welcome-star { color: var(--gold); font-size: 35px; text-shadow: 0 0 20px #e9c98755; }
-.welcome-sections { display: grid; grid-template-columns: .85fr 1.15fr; gap: 35px; text-align: left; }
-.welcome-sections h2, .controls-help h2 {
-  margin: 0 0 15px;
-  color: var(--gold);
-  font: 24px/1.3 Georgia, serif;
-}
-.welcome-sections > section + section { border-left: 1px solid #b7955e55; padding-left: 35px; }
-.welcome-sections p, .controls-list {
-  margin: 0;
+.world-guide .welcome-introduction {
+  margin: 0 0 18px;
   color: #e0d5e8;
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.6;
 }
+.welcome-sections { display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; text-align: left; }
+.welcome-sections h2, .controls-help h2 {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font: 22px/1.3 Georgia, serif;
+}
+.welcome-sections > section + section { border-left: 1px solid #b7955e55; padding-left: 26px; }
+.welcome-sections p, .controls-list { margin: 0; color: #e0d5e8; font-size: 16px; line-height: 1.5; }
 .controls-list { padding-left: 20px; }
-.controls-list li { margin: 0 0 9px; padding-left: 4px; }
+.controls-list li { margin: 0 0 6px; padding-left: 4px; }
 .controls-list li::marker { color: #d5b878; }
-.welcome-screen #start-game { margin-top: 30px; min-width: 210px; font-size: 16px; }
-.welcome-input-note { display: block; margin-top: 12px; font-size: 13px; color: #baadca; }
+.controls-help h2:focus { outline: none; }
 
 .tutorial-card {
   position: fixed;
@@ -79,14 +59,16 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
 .controls-help .eyebrow { margin-bottom: 14px; }
 #close-help { font-size: 16px; }
 
+@media (max-width: 1100px) {
+  #world { height: auto; padding-bottom: 155px; }
+  .world-guide { position: relative; left: auto; right: auto; bottom: auto; margin: 24px 4vw 0; }
+}
 @media (max-width: 750px) {
+  #world { padding-bottom: 220px; }
   .tutorial-card { position: static; width: 100%; padding: 12px 15px; margin: 4px 0 14px; }
   #tutorial-label { font-size: 10px; margin-bottom: 5px; }
   #tutorial-text { font-size: 15px; }
   #skip-tutorial { margin-top: 6px; }
-  dialog.welcome-screen { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); padding: 24px; }
-  .welcome-screen h1 { font-size: clamp(25px, 7vw, 40px); }
-  .welcome-screen .welcome-introduction { font-size: 16px; margin-bottom: 24px; }
   .welcome-sections { grid-template-columns: 1fr; gap: 23px; }
   .welcome-sections > section + section { border-left: none; border-top: 1px solid #b7955e55; padding: 20px 0 0; }
   .welcome-sections h2 { font-size: 22px; }
