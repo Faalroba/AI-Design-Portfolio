@@ -40,6 +40,7 @@ function feedback(correct=false){clearTimeout(feedbackTimer);$('#wand').classLis
 function bindHotspots(){document.querySelectorAll('.hotspot').forEach(el=>{el.addEventListener('click',e=>{e.stopPropagation();act(el.dataset.action);});el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();act(el.dataset.action);}});});}
 function updateUI(){
  const beyond=state.view==='beyond',i=state.room,done=roomDone();
+ $('#room').dataset.reality=state.reality;
  $('#room-label').textContent=beyond?'BEYOND THE MIRROR / THE FINAL THRESHOLD':`ROOM 0${i+1} / ${ROOMS[i].title.toUpperCase()}`;
  $('#reality-name').textContent=beyond?'One last lock.':state.reality==='cool'?['The world beneath it.','What survives the shift?','Promises in the glass.'][i]:['The world you know.','Not every light tells the truth.','Three doors. No way out.'][i];
  $('#reality-badge').textContent=beyond?'Beyond the glass':state.reality==='cool'?'Alternate reality':'Original reality';

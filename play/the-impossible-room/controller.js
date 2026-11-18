@@ -7,6 +7,8 @@ function showWorld(){
  $('#lock2').textContent=roomDone(1)?'✦ ROOM 02 · COMPLETE':P.available(state,1)?'↗ ROOM 02 · OPEN':'◇ ROOM 02 · SEALED';$('#lock3').textContent=roomDone(2)?'✦ ROOM 03 · COMPLETE':P.available(state,2)?'↗ ROOM 03 · OPEN':'◇ ROOM 03 · SEALED';
  $('#lock2').classList.toggle('unsealed',P.available(state,1));$('#lock3').classList.toggle('unsealed',P.available(state,2));
  $('#world').dataset.progress=String(state.completed.length);
+ $('#platform-enter').setAttribute('aria-label',P.allComplete(state)?'Return to the mirror':`Enter Room ${nextDestination()+1}: ${ROOMS[nextDestination()].title}`);
+ $('#platform-enter span').textContent=P.allComplete(state)?'RETURN TO THE MIRROR':state.completed.length?`CONTINUE TO ROOM ${nextDestination()+1}`:'START WITH ROOM 1';
  $('#world-intro').innerHTML=P.allComplete(state)?'Three puzzles answered.<br>The mirror is waiting for you.':'A key waits beyond the glass.<br>Follow the next light.';
  $('#world-feedback').textContent='';$('#wand').dataset.mode='';
 }
@@ -14,20 +16,21 @@ function nextDestination(){return Math.min(state.completed.length,2);}
 function enter(index=0){
  if(!P.enter(state,index)){if(state.escaped)return;$('#world-feedback').textContent=`The pathway is sealed. Complete Room ${index} first.`;feedback(false);return false;}
  clearTimeout(completionTimer);state.view='room';state.reality=state.realities[index];hintCount=0;$('#world').hidden=true;$('#ending').hidden=true;$('#room').hidden=false;draw();
- say(roomDone(index)?P.allComplete(state)?'All three rooms are complete. Return to the key within the mirror.':'This room is solved. Its open door leads onward.':['The mirror is awake. Something in this room is out of place.','Six marks. Some lights change; some remain.','Three doors stand in the room. The mirror shows four.'][index]);return true;
+ say(roomDone(index)?P.allComplete(state)?'All three rooms are complete. Return to the key within the mirror.':'This room is solved. Its open door leads onward.':['The mirror is awake. Something in this room is out of place.','Six marks. Some lights change; some remain.','Three doors stand in the room. The mirror shows four.'][index]);window.GamePolish?.enter();return true;
 }
 function shift(){
  if(state.view!=='room')return;
  state.reality=state.reality==='warm'?'cool':'warm';state.realities[state.room]=state.reality;
  if(state.room===2&&!roomDone())state.comparedFalseRealities=true;
  draw();
+ window.GamePolish?.shift();
  $('#stage').classList.remove('shift-wash');void $('#stage').offsetWidth;$('#stage').classList.add('shift-wash');chime();
  say(state.room===0?(state.reality==='cool'?'The table has moved. What was beneath it?':'The room returns. You remember what changed.'):state.room===1?'The lights have changed. Which symbols still glow?':'Which doorway in the mirror kept its mark? Click the frame to look again.');
 }
 function finishRoom(index){
  const previous=state.completed.length;if(!P.complete(state,index))return;
  if(index===0)state.cabinet=true;
- draw();animateProgress(previous);feedback(true);
+ draw();animateProgress(previous);feedback(true);window.GamePolish?.solved();
  say(['The marks agree. Your room door opens; the final exit in the mirror opens a little.','The pattern holds. Your room door opens; the final exit opens halfway.','The false exits fade. The true doorway opens; the mirror releases its key.'][index]);
  clearTimeout(completionTimer);completionTimer=setTimeout(()=>{if(!roomDone(index)||state.escaped||state.room!==index||state.view!=='room')return;
   $('#completion-label').textContent=`ROOM 0${index+1} COMPLETE`;
@@ -55,6 +58,7 @@ function chooseReflectedDoor(index){
  const [original,alternate]=FALSE_DOORS[index].marks;
  if(original===alternate){finishRoom(2);return;}
  state.attempts[2]++;
+ feedback(false);
  say(`That mark changes from ${original} to ${alternate}. Look for a doorway that keeps its mark.`);
 }
 function act(id){
@@ -65,15 +69,15 @@ function act(id){
  switch(id){
  case'mirror':if(P.allComplete(state)&&state.key){if(P.crossMirror(state)){state.view='beyond';draw();say('You have crossed the glass. The final lock waits for the golden key.');chime();}}else shift();break;
  case'key':if(P.collectKey(state)){clearTimeout(completionTimer);draw();say('The golden key rests in your keeping. The mirror is now a passage.');feedback(true);}else{say('The key is behind the glass. Three solved rooms will make it reachable.');feedback(false);}break;
- case'clue':state.clue=true;say('The floor remembers: crescent moon → diamond → star.');chime();break;
+ case'clue':state.clue=true;say('The floor remembers: crescent moon → diamond → star.');window.GamePolish?.discover('clue');break;
  case'table':say(state.reality==='warm'?'The table covers a worn patch of floor. In the reflection, it stands elsewhere.':'Where the table once stood, three marks catch the light.');break;
  case'chair':say('A crescent chair. In the mirror, its place is empty.');break;
  case'ornament':say('The crystal has no thread. Its reflection hangs somewhere else.');break;
  case'cabinet':if(roomDone(0))say('The cabinet is open. The matching marks released the room door.');else openPuzzle();break;
  case'door':if(roomDone()&&state.room<2)enter(state.room+1);else{say('The room door is sealed. Compare the clues on both sides of reality.');feedback(false);}break;
- case'pattern-note':say('Keep the lights that survive both realities. Read their order in the mirror.');break;
- case'false-note':say(FALSE_INSCRIPTION);break;
- case'final-lock':if(P.unlock(state)){draw();feedback(true);say('The golden key turns. The final door is unlocked. Step through.');}else{say('The golden key must be collected before this lock will open.');feedback(false);}break;
+ case'pattern-note':say('Keep the lights that survive both realities. Read their order in the mirror.');window.GamePolish?.discover('pattern-note');break;
+ case'false-note':say(FALSE_INSCRIPTION);window.GamePolish?.discover('false-note');break;
+ case'final-lock':if(P.unlock(state)){draw();const leaf=$('.final-leaf');if(leaf){leaf.style.transform='scaleX(.28)';requestAnimationFrame(()=>requestAnimationFrame(()=>{if(leaf.isConnected)leaf.style.transform='scaleX(.08)';}));}feedback(true);say('The golden key turns. The final door is unlocked. Step through.');}else{say('The golden key must be collected before this lock will open.');feedback(false);}break;
  case'escape-door':if(state.finalUnlocked&&P.escape(state)){chime();showEnding();}else{say('One last lock. Use your golden key on the glowing lock.');feedback(false);}break;
  case'map':showWorld();break;
  }
@@ -84,7 +88,7 @@ function renderDials(){
 }
 function openPuzzle(){renderDials();$('#puzzle-message').textContent='Click each symbol to change it.';$('#puzzle').showModal();}
 function showEnding(){clearTimeout(completionTimer);state.view='ending';$('#world').hidden=true;$('#room').hidden=true;document.querySelectorAll('dialog[open]').forEach(d=>d.close());$('#ending').hidden=false;$('#ending-title').focus();$('#wand').dataset.mode='';}
-function restart(){clearTimeout(completionTimer);clearTimeout(feedbackTimer);document.querySelectorAll('dialog[open]').forEach(d=>d.close());state=fresh();hintCount=0;$('#stage').className='stage';$('#wand').classList.remove('wrong-wand');showWorld();}
+function restart(){clearTimeout(completionTimer);clearTimeout(feedbackTimer);window.GamePolish?.reset();document.querySelectorAll('dialog[open]').forEach(d=>d.close());state=fresh();hintCount=0;$('#stage').className='stage';$('#wand').classList.remove('wrong-wand');showWorld();}
 $('#check').onclick=()=>{if(state.dials.every((n,i)=>SYMBOLS[n]===SOLUTION[i])){$('#puzzle').close();finishRoom(0);}else{state.attempts[0]++;$('#puzzle-message').textContent='The marks dim. Nothing is lost. Look for their order in the other reality.';$('#dials').classList.remove('wrong');void $('#dials').offsetWidth;$('#dials').classList.add('wrong');feedback(false);}};
 document.querySelectorAll('[data-room]').forEach(el=>el.onclick=()=>enter(Number(el.dataset.room)));
 $('#platform-enter').onclick=()=>enter(nextDestination());
