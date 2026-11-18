@@ -33,6 +33,7 @@ window.GamePolish = (() => {
   }
   function enter() {
     clearHint(); notice.textContent = '';
+    if (!audio && sound) chime();
     const stage = document.querySelector('#stage');
     stage.classList.remove('room-arrival'); void stage.offsetWidth;
     stage.classList.add('room-arrival');

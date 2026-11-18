@@ -1,4 +1,6 @@
 /* Week 10 feedback preserves the room art and the five wand states. */
+#sound { font-size: 15px; border-color: #cdb07788; }
+#sound[aria-pressed="true"] { color: #ffe1a0; background: #d5b87814; box-shadow: 0 0 14px #e9c98715; }
 #platform-enter { animation: entryLight 3s ease-in-out infinite; }
 #room1:not(.locked) { border-color: #d8bb7c; }
 .room-route .locked { border-style: dashed; }

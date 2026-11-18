@@ -4,7 +4,7 @@ const ROOMS=[{id:'mirror',title:'The Mirror Room'},{id:'pattern',title:'The Patt
 const SYMBOLS=['△','☾','◇','✦'],SOLUTION=['☾','◇','✦'];
 const PATTERN=['△','◇','✦','⬡','○','□'],PATTERN_NAMES=['triangle','diamond','star','hexagon','circle','square'],PATTERN_SOLUTION=[1,0,2];
 const $=s=>document.querySelector(s);
-let state,sound=false,audio,completionTimer=null,feedbackTimer=null,hintCount=0;
+let state,sound=true,audio,completionTimer=null,feedbackTimer=null,hintCount=0;
 function fresh(){return {...P.create(),view:'world',reality:'warm',realities:['warm','warm','warm'],clue:false,cabinet:false,dials:[0,0,0],selection:[],comparedFalseRealities:false,attempts:[0,0,0]};}
 state=fresh();
 const say=t=>{$('#message').textContent=t;};

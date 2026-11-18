@@ -107,7 +107,7 @@ $('#hint').onclick=()=>{
  say(hints[Math.min(hintCount++,hints.length-1)]);
 };
 $('#restart').onclick=()=>$('#reset-dialog').showModal();$('#cancel-restart').onclick=()=>$('#reset-dialog').close();$('#confirm-restart').onclick=restart;$('#play-again').onclick=restart;
-$('#sound').onclick=()=>{sound=!sound;$('#sound').textContent=sound?'Sound on':'Sound off';$('#sound').setAttribute('aria-pressed',String(sound));if(sound)chime();};
+$('#sound').onclick=()=>{sound=!sound;$('#sound').textContent=sound?'Sound on · Mute':'Sound off · Unmute';$('#sound').setAttribute('aria-pressed',String(sound));$('#sound').setAttribute('aria-label',sound?'Mute game sound':'Unmute game sound');if(sound)chime();};
 // One cursor: the wand tip is the pointer. Star effects communicate the action.
 function updateWand(target){const wandElement=$('#wand');const host=target?.closest?.('dialog[open]')||document.body;if(wandElement.parentElement!==host)host.append(wandElement);const el=target?.closest?.('[data-kind],button,a');const mode=el?.dataset.kind||(el?'interact':'explore');$('#wand').dataset.mode=mode;if(!$('#room').hidden)$('#focus-label').textContent=el?.dataset.label||'Move your wand. Let the room answer.';}
 document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;document.documentElement.classList.add('wand-ready');const wand=$('#wand');wand.style.display='block';wand.style.left=(e.clientX-58)+'px';wand.style.top=(e.clientY-18)+'px';updateWand(e.target);});
