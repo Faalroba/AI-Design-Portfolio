@@ -2,7 +2,7 @@
 .touch-instructions .mouse-copy { display: none; }
 .touch-instructions .touch-copy { display: inline; }
 
-#world { min-height: 900px; }
+#world { min-height: 1000px; }
 .world-guide {
   position: absolute;
   left: 5vw;
@@ -15,9 +15,10 @@
 .world-copy p.welcome-introduction {
   margin: 24px 0 0;
   color: #fff6e8;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.7;
-  text-shadow: 0 2px 7px #090516;
+  font-weight: 500;
+  text-shadow: 0 2px 5px #090516, 0 0 15px #090516bb;
 }
 .world-entry { position: absolute; left: 5vw; bottom: 145px; z-index: 3; }
 .welcome-sections { display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; text-align: left; }
@@ -28,6 +29,14 @@
 }
 .welcome-sections > section + section { border-left: 1px solid #b7955e55; padding-left: 26px; }
 .welcome-sections p, .controls-list { margin: 0; color: #e0d5e8; font-size: 16px; line-height: 1.5; }
+.world-guide .welcome-sections h2 { font-size: 26px; color: #ffe1a0; }
+.world-guide .welcome-sections p, .world-guide .controls-list {
+  font-size: 19px;
+  line-height: 1.65;
+  font-weight: 500;
+  color: #fff6e8;
+  text-shadow: 0 2px 5px #090516, 0 0 15px #090516bb;
+}
 .controls-list { padding-left: 20px; }
 .controls-list li { margin: 0 0 6px; padding-left: 4px; }
 .controls-list li::marker { color: #d5b878; }
@@ -64,6 +73,9 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
   .world-guide { position: relative; left: auto; right: auto; bottom: auto; width: auto; margin: 24px 5vw 0; }
 }
 @media (max-width: 750px) {
+  .world-copy p.welcome-introduction { font-size: 20px; }
+  .world-guide .welcome-sections p, .world-guide .controls-list { font-size: 18px; }
+  .world-guide .welcome-sections h2 { font-size: 24px; }
   #world { padding-bottom: 220px; }
   .tutorial-card { position: static; width: 100%; padding: 12px 15px; margin: 4px 0 14px; }
   #tutorial-label { font-size: 10px; margin-bottom: 5px; }
