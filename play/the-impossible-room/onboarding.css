@@ -3,13 +3,15 @@
 .touch-instructions .touch-copy { display: inline; }
 
 #world { min-height: 1000px; height: auto; padding-bottom: 155px; }
+.world-copy { margin-left: 24px; }
+#world .room-route { left: 24px; right: 24px; }
 .world-art { background-size: auto, auto, contain; background-repeat: no-repeat; }
 #world::before { content: ""; position: absolute; inset: 0; background: url('assets/world-opening.webp') center / cover; filter: blur(36px); opacity: .22; }
 .map-lock { display: none; }
 .world-guide {
   position: relative;
   width: min(430px, calc(100% - 10vw));
-  margin: 24px 0 0 5vw;
+  margin: 24px 0 0 24px;
   z-index: 2;
   padding: 0;
   text-shadow: 0 1px 4px #090516, 0 2px 12px #090516aa;
@@ -74,6 +76,9 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
 #close-help { font-size: 16px; }
 
 @media (max-width: 750px) {
+  .world-copy { margin-left: 20px; }
+  .world-guide { margin-left: 20px; }
+  #world .room-route { left: 20px; right: 20px; }
   #room1 { padding-right: 10px; }
   .route-enter { position: static; display: block; width: fit-content; transform: none; margin-top: 12px; padding: 6px 10px; font-size: 14px; }
   .world-copy p.welcome-introduction { font-size: 20px; }
