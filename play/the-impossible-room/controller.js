@@ -7,7 +7,6 @@ function showWorld(){
  $('#lock2').textContent=roomDone(1)?'✦ ROOM 02 · COMPLETE':P.available(state,1)?'↗ ROOM 02 · OPEN':'◇ ROOM 02 · SEALED';$('#lock3').textContent=roomDone(2)?'✦ ROOM 03 · COMPLETE':P.available(state,2)?'↗ ROOM 03 · OPEN':'◇ ROOM 03 · SEALED';
  $('#lock2').classList.toggle('unsealed',P.available(state,1));$('#lock3').classList.toggle('unsealed',P.available(state,2));
  $('#world').dataset.progress=String(state.completed.length);
- const next=nextDestination();$('#begin').textContent=P.allComplete(state)?'Return to the mirror ↗':`Enter ${ROOMS[next].title} ↗`;
  $('#world-intro').innerHTML=P.allComplete(state)?'Three puzzles answered.<br>The mirror is waiting for you.':'A key waits beyond the glass.<br>Follow the next light.';
  $('#world-feedback').textContent='';$('#wand').dataset.mode='';
 }
@@ -87,7 +86,7 @@ function openPuzzle(){renderDials();$('#puzzle-message').textContent='Click each
 function showEnding(){clearTimeout(completionTimer);state.view='ending';$('#world').hidden=true;$('#room').hidden=true;document.querySelectorAll('dialog[open]').forEach(d=>d.close());$('#ending').hidden=false;$('#ending-title').focus();$('#wand').dataset.mode='';}
 function restart(){clearTimeout(completionTimer);clearTimeout(feedbackTimer);document.querySelectorAll('dialog[open]').forEach(d=>d.close());state=fresh();hintCount=0;$('#stage').className='stage';$('#wand').classList.remove('wrong-wand');showWorld();}
 $('#check').onclick=()=>{if(state.dials.every((n,i)=>SYMBOLS[n]===SOLUTION[i])){$('#puzzle').close();finishRoom(0);}else{state.attempts[0]++;$('#puzzle-message').textContent='The marks dim. Nothing is lost. Look for their order in the other reality.';$('#dials').classList.remove('wrong');void $('#dials').offsetWidth;$('#dials').classList.add('wrong');feedback(false);}};
-$('#begin').onclick=()=>enter(nextDestination());document.querySelectorAll('[data-room]').forEach(el=>el.onclick=()=>enter(Number(el.dataset.room)));
+document.querySelectorAll('[data-room]').forEach(el=>el.onclick=()=>enter(Number(el.dataset.room)));
 $('#map').onclick=()=>{if(state.view==='beyond'){state.insideMirror=false;enter(2);}else showWorld();};$('#home').onclick=e=>{e.preventDefault();showWorld();};
 $('#continue').onclick=()=>{clearTimeout(completionTimer);$('#complete').close();if(state.room<2)enter(state.room+1);else{draw();say('Return to the key inside the mirror. The glass will let you reach it now.');document.querySelector('#obj-key')?.focus();}};
 $('#stay').onclick=()=>$('#complete').close();$('.close').onclick=()=>$('#puzzle').close();

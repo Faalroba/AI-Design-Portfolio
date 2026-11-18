@@ -103,7 +103,6 @@
     }, 2400);
   }
 
-  document.querySelector('#begin').addEventListener('click', startIntroduction);
   document.querySelector('#room1').addEventListener('click', startIntroduction);
   document.querySelector('#skip-tutorial').addEventListener('click', closeTutorial);
   document.querySelector('#help').addEventListener('click', () => help.showModal());

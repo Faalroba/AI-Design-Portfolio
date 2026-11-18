@@ -19,7 +19,9 @@
   font-weight: 500;
   text-shadow: 0 2px 5px #090516, 0 0 15px #090516bb;
 }
-.world-entry { position: absolute; left: calc(5vw + 480px); bottom: 155px; z-index: 3; }
+#room1 { position: relative; padding-right: 100px; }
+.route-enter { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); padding: 9px 14px; border: 1px solid #d5b87888; border-radius: 3px; color: #ffe1a0; font-size: 16px; font-weight: 500; }
+#room1:hover .route-enter, #room1:focus-visible .route-enter { background: #d5b87822; }
 .world-guide .welcome-sections { grid-template-columns: 1fr; gap: 24px; }
 .world-guide .welcome-sections > section + section { border: none; padding: 0; }
 .welcome-sections { display: grid; grid-template-columns: .85fr 1.15fr; gap: 26px; text-align: left; }
@@ -69,7 +71,8 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
 #close-help { font-size: 16px; }
 
 @media (max-width: 750px) {
-  .world-entry { position: relative; left: auto; bottom: auto; margin: 28px 5vw 0; }
+  #room1 { padding-right: 10px; }
+  .route-enter { position: static; display: block; width: fit-content; transform: none; margin-top: 12px; padding: 6px 10px; font-size: 14px; }
   .world-copy p.welcome-introduction { font-size: 20px; }
   .world-guide .welcome-sections p, .world-guide .controls-list { font-size: 18px; }
   .world-guide .welcome-sections h2 { font-size: 24px; }
