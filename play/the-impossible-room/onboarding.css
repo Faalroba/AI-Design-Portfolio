@@ -3,6 +3,9 @@
 .touch-instructions .touch-copy { display: inline; }
 
 #world { min-height: 1000px; height: auto; padding-bottom: 155px; }
+.world-art { background-size: auto, auto, contain; background-repeat: no-repeat; }
+#world::before { content: ""; position: absolute; inset: 0; background: url('assets/world-opening.webp') center / cover; filter: blur(36px); opacity: .22; }
+.map-lock { display: none; }
 .world-guide {
   position: relative;
   width: min(430px, calc(100% - 10vw));
