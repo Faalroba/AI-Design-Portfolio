@@ -2,10 +2,11 @@
 .touch-instructions .mouse-copy { display: none; }
 .touch-instructions .touch-copy { display: inline; }
 
-.hotspot { transition: filter .22s ease-out; }
-.hotspot:focus-visible { filter: drop-shadow(0 0 4px #f6d79588) drop-shadow(0 0 9px #bd9ce44d); }
+.hotspot[data-kind="info"] { transition: filter .22s ease-out; }
+.hotspot[data-kind="info"]:focus-visible { filter: drop-shadow(0 0 4px #f6d79588) drop-shadow(0 0 9px #bd9ce44d); }
+.hotspot:not([data-kind="info"]) > .halo { opacity: 0; }
 @media (hover: hover) and (pointer: fine) {
-  .hotspot:hover { filter: drop-shadow(0 0 4px #f6d79588) drop-shadow(0 0 9px #bd9ce44d); }
+  .hotspot[data-kind="info"]:hover { filter: drop-shadow(0 0 4px #f6d79588) drop-shadow(0 0 9px #bd9ce44d); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hotspot { transition: none; }
