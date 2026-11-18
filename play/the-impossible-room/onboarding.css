@@ -50,26 +50,6 @@
 .controls-list li::marker { color: #d5b878; }
 .controls-help h2:focus { outline: none; }
 
-.tutorial-card {
-  position: fixed;
-  top: 190px;
-  right: 24px;
-  z-index: 10;
-  width: 285px;
-  padding: 16px 18px 13px;
-  border: 1px solid #cfb17688;
-  border-radius: 7px;
-  background: #231b34f2;
-  box-shadow: 0 6px 28px #0d081d55;
-}
-#tutorial-label { margin: 0 0 9px; color: var(--gold); font-size: 11px; letter-spacing: 1.6px; }
-#tutorial-text { margin: 0; color: #f0e5f2; font-size: 16px; line-height: 1.55; }
-#skip-tutorial { margin-top: 12px; padding: 2px 0; border: none; color: #c1b2cf; font-size: 13px; }
-#skip-tutorial:hover { color: var(--gold); background: transparent; }
-.hotspot.tutorial-target > .halo { opacity: .8; animation: tutorialGlow 2.2s ease-in-out infinite; }
-#wand.tutorial-wand svg { filter: drop-shadow(0 0 9px #efcf8c88); }
-@keyframes tutorialGlow { 50% { opacity: .25; } }
-
 dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto; }
 .controls-help .controls-list { text-align: left; margin: 22px 0 26px; }
 .controls-help .eyebrow { margin-bottom: 14px; }
@@ -84,10 +64,6 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
   .world-guide .welcome-sections p, .world-guide .controls-list { font-size: 18px; }
   .world-guide .welcome-sections h2 { font-size: 24px; }
   #world { padding-bottom: 220px; }
-  .tutorial-card { position: static; width: 100%; padding: 12px 15px; margin: 4px 0 14px; }
-  #tutorial-label { font-size: 10px; margin-bottom: 5px; }
-  #tutorial-text { font-size: 15px; }
-  #skip-tutorial { margin-top: 6px; }
   .welcome-sections { grid-template-columns: 1fr; gap: 23px; }
   .welcome-sections > section + section { border-left: none; border-top: 1px solid #b7955e55; padding: 20px 0 0; }
   .welcome-sections h2 { font-size: 22px; }
@@ -95,7 +71,4 @@ dialog.controls-help { width: min(550px, calc(100vw - 32px)); max-height: calc(1
 @media (max-width: 600px) {
   header { height: auto; min-height: 94px; flex-wrap: wrap; gap: 14px; padding: 16px 18px; }
   .top-actions { margin-left: auto; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hotspot.tutorial-target > .halo { animation: none; opacity: .8; }
 }
