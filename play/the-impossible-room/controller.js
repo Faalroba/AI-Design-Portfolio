@@ -3,7 +3,7 @@ function showWorld(){
  clearTimeout(completionTimer);
  if(state.escaped){showEnding();return;}
  state.view='world';state.insideMirror=false;$('#room').hidden=true;$('#ending').hidden=true;$('#world').hidden=false;
- document.querySelectorAll('[data-room]').forEach(btn=>{const i=Number(btn.dataset.room),available=P.available(state,i),done=roomDone(i);btn.classList.toggle('locked',!available);btn.setAttribute('aria-disabled',String(!available));btn.dataset.kind=available?'move':'info';btn.querySelector('span').textContent=done?'Complete · revisit ↗':available?'Pathway open · enter ↗':`Locked · complete Room ${i}`;btn.setAttribute('aria-label',`${ROOMS[i].title}, ${done?'completed':available?'available':'locked'}`);});
+ document.querySelectorAll('[data-room]').forEach(btn=>{const i=Number(btn.dataset.room),available=P.available(state,i),done=roomDone(i);btn.classList.toggle('locked',!available);btn.disabled=true;btn.setAttribute('aria-disabled','true');btn.dataset.kind='explore';btn.querySelector('span').textContent=done?'Complete':available?'Ready · use Enter':`Locked · complete Room ${i}`;btn.setAttribute('aria-label',`${ROOMS[i].title}, ${done?'completed':available?'available':'locked'}`);});
  $('#lock2').textContent=roomDone(1)?'✦ ROOM 02 · COMPLETE':P.available(state,1)?'↗ ROOM 02 · OPEN':'◇ ROOM 02 · SEALED';$('#lock3').textContent=roomDone(2)?'✦ ROOM 03 · COMPLETE':P.available(state,2)?'↗ ROOM 03 · OPEN':'◇ ROOM 03 · SEALED';
  $('#lock2').classList.toggle('unsealed',P.available(state,1));$('#lock3').classList.toggle('unsealed',P.available(state,2));
  $('#world').dataset.progress=String(state.completed.length);
@@ -90,7 +90,7 @@ function openPuzzle(){renderDials();$('#puzzle-message').textContent='Click each
 function showEnding(){clearTimeout(completionTimer);state.view='ending';$('#world').hidden=true;$('#room').hidden=true;document.querySelectorAll('dialog[open]').forEach(d=>d.close());$('#ending').hidden=false;$('#ending-title').focus();$('#wand').dataset.mode='';}
 function restart(){clearTimeout(completionTimer);clearTimeout(feedbackTimer);window.GamePolish?.reset();document.querySelectorAll('dialog[open]').forEach(d=>d.close());state=fresh();hintCount=0;$('#stage').className='stage';$('#wand').classList.remove('wrong-wand');showWorld();}
 $('#check').onclick=()=>{if(state.dials.every((n,i)=>SYMBOLS[n]===SOLUTION[i])){$('#puzzle').close();finishRoom(0);}else{state.attempts[0]++;$('#puzzle-message').textContent='The marks dim. Nothing is lost. Look for their order in the other reality.';$('#dials').classList.remove('wrong');void $('#dials').offsetWidth;$('#dials').classList.add('wrong');feedback(false);}};
-document.querySelectorAll('[data-room]').forEach(el=>el.onclick=()=>enter(Number(el.dataset.room)));
+// Room cards show progress; the glowing platform is the only map entry control.
 $('#platform-enter').onclick=()=>enter(nextDestination());
 $('#map').onclick=()=>{if(state.view==='beyond'){state.insideMirror=false;enter(2);}else showWorld();};$('#home').onclick=e=>{e.preventDefault();showWorld();};
 $('#continue').onclick=()=>{clearTimeout(completionTimer);$('#complete').close();if(state.room<2)enter(state.room+1);else{draw();say('Return to the key inside the mirror. The glass will let you reach it now.');document.querySelector('#obj-key')?.focus();}};
@@ -107,7 +107,7 @@ $('#hint').onclick=()=>{
  say(hints[Math.min(hintCount++,hints.length-1)]);
 };
 $('#restart').onclick=()=>$('#reset-dialog').showModal();$('#cancel-restart').onclick=()=>$('#reset-dialog').close();$('#confirm-restart').onclick=restart;$('#play-again').onclick=restart;
-$('#sound').onclick=()=>{sound=!sound;$('#sound').textContent=sound?'Sound on · Mute':'Sound off · Unmute';$('#sound').setAttribute('aria-pressed',String(sound));$('#sound').setAttribute('aria-label',sound?'Mute game sound':'Unmute game sound');if(sound)chime();};
+$('#sound').onclick=()=>{sound=!sound;window.GameAmbience?.setMuted(!sound);$('#sound').textContent=sound?'Sound on · Mute':'Sound off · Unmute';$('#sound').setAttribute('aria-pressed',String(sound));$('#sound').setAttribute('aria-label',sound?'Mute music and sound effects':'Unmute music and sound effects');if(sound)chime();};
 // One cursor: the wand tip is the pointer. Star effects communicate the action.
 function updateWand(target){const wandElement=$('#wand');const host=target?.closest?.('dialog[open]')||document.body;if(wandElement.parentElement!==host)host.append(wandElement);const el=target?.closest?.('[data-kind],button,a');const mode=el?.dataset.kind||(el?'interact':'explore');$('#wand').dataset.mode=mode;if(!$('#room').hidden)$('#focus-label').textContent=el?.dataset.label||'Move your wand. Let the room answer.';}
 document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;document.documentElement.classList.add('wand-ready');const wand=$('#wand');wand.style.display='block';wand.style.left=(e.clientX-58)+'px';wand.style.top=(e.clientY-18)+'px';updateWand(e.target);});

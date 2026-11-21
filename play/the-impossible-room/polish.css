@@ -4,6 +4,7 @@
 #platform-enter { animation: entryLight 3s ease-in-out infinite; }
 #room1:not(.locked) { border-color: #d8bb7c; }
 .room-route .locked { border-style: dashed; }
+.room-route button { pointer-events: none; }
 .hotspot > .halo { transition: opacity .2s ease-out; }
 .hotspot:not([data-kind="info"]) > .halo { opacity: 0; }
 .hotspot:not([data-kind="info"]):focus-visible > .halo { opacity: .65; }
