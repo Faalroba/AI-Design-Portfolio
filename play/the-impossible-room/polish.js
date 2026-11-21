@@ -54,9 +54,10 @@ window.GamePolish = (() => {
     if (state.room === 0 && !shifted && !learned && !roomDone(0)) showHint('Look closely. What changed?');
     shifted = true;
   }
-  function solved() { clearHint(); announce('Puzzle solved!'); }
+  function solved() { clearHint(); announce('Puzzle solved!'); window.GameView?.closeMirror(); }
   function reset() {
     noticed.clear(); shifted = learned = false; clearHint();
+    window.GameView?.reset();
     clearTimeout(noticeTimer); notice.textContent = '';
     document.querySelectorAll('.discovery-sparkles').forEach(el => el.remove());
   }

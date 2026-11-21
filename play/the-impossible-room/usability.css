@@ -1,0 +1,30 @@
+#room-feedback { margin: 6px 0 14px; padding: 10px 14px; border-left: 2px solid #bca073; background: #21192fbb; }
+#room-feedback #message { text-align: left; font-size: 16px; line-height: 1.5; margin: 0; min-height: 24px; }
+#room-feedback #action-notice { position: static; transform: none; min-height: 21px; margin: 4px 0 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; font-size: 14px; }
+#room-feedback #context-hint:not(:empty) { margin: 6px 0 0; padding: 0; border: none; }
+.view-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.view-tools button { font-size: 14px; padding: 8px 12px; }
+#mirror-cue { flex: 1 1 260px; margin: 0; color: #d8cce7; font-size: 14px; line-height: 1.5; }
+#zoom-hint { flex-basis: 100%; margin: 0; color: #ead294; font-size: 14px; }
+.scene-viewport { width: 100%; overflow-x: auto; overflow-y: hidden; scrollbar-color: #c4a574 #21192f; }
+.stage.enlarged-room { max-width: none; }
+.stage.enlarged-room svg { max-height: none; height: auto; }
+.hotspot > .halo { pointer-events: none; }
+.hotspot[data-kind="shift"] > .halo { stroke: #a7dbea; }
+#mirror-detail { width: min(440px, calc(100vw - 28px)); max-height: calc(100dvh - 28px); padding: 18px; overflow: auto; text-align: left; }
+.mirror-detail-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+#mirror-detail h2 { margin: 0; color: #ead294; font: 24px Georgia, serif; }
+#mirror-detail-cue { margin: 12px 0; color: #e6dced; font-size: 15px; line-height: 1.5; }
+#mirror-detail-feedback { margin: 0 0 8px; padding: 8px 10px; color: #f4e5f6; font-size: 15px; line-height: 1.5; border-left: 2px solid #bca073; background: #171223; }
+#mirror-detail-art svg { display: block; width: 100%; height: min(62dvh, 570px); overflow: visible; }
+@media (max-width: 750px) {
+  .room-heading { display: block; }
+  .room-tools { justify-content: flex-start; margin: 8px 0 12px; gap: 8px; }
+  .room-tools button { font-size: 14px; padding: 8px 10px; }
+  .stage svg { min-height: 0; max-height: none; height: auto; aspect-ratio: 830 / 565; }
+  .stage.enlarged-room svg { aspect-ratio: 830 / 565; }
+  .scene-caption { flex-wrap: wrap; gap: 10px; font-size: 12px; }
+  .progress { margin-left: auto; }
+  #mirror-cue { flex-basis: 100%; }
+  #room-feedback { padding: 9px 11px; }
+}

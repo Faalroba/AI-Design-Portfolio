@@ -58,4 +58,4 @@ function updateUI(){
  }
  $('#focus-label').textContent='Move your wand. Let the room answer.';$('#wand').dataset.mode='';
 }
-function draw(){$('#stage').classList.remove('shift-wash','wrong-scene','success-flash');if(state.view==='beyond')drawBeyond();else if(state.room===0)drawRoomOne();else if(state.room===1)drawPatternRoom();else drawFalseRoom();updateUI();bindHotspots();}
+function draw(){$('#stage').classList.remove('shift-wash','wrong-scene','success-flash');if(state.view==='beyond')drawBeyond();else if(state.room===0)drawRoomOne();else if(state.room===1)drawPatternRoom();else drawFalseRoom();updateUI();bindHotspots();window.GameView?.refresh();}
