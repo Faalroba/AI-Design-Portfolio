@@ -55,6 +55,15 @@
 .development .proposal-topic{border-top:3px solid var(--room-gold);padding-top:10px}
 .development .proposal-topic+ .proposal-topic{border-color:var(--room-turquoise)}
 .proposal-return{display:inline-block;margin:0 0 35px}
+.final-game-button{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;background:var(--purple);color:#fffaf0;border:1px solid var(--purple);border-radius:4px;font-size:16px;font-weight:600;text-decoration:none}
+.final-game-button:hover{background:#4c258d;color:#fffaf0}
+.final-game-button:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+.final-game-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:24px 0}
+.final-game-comparison figure{margin:0;min-width:0}
+.final-game-comparison img{display:block;width:100%;height:auto;object-fit:contain}
+.final-game-comparison figcaption{display:grid;gap:5px;margin-top:12px;font-size:14px;line-height:1.6;color:#65546f}
+.final-game-comparison figcaption strong{color:var(--purple);font-size:15px}
+@media(max-width:750px){.final-game-comparison{grid-template-columns:1fr;gap:24px}.final-game-button{width:100%;text-align:center}}
 @media(max-width:900px){.proposal-contents{grid-template-columns:repeat(2,minmax(0,1fr))}.proposal-columns.moments,.proposal-columns.direction,.proposal-rooms{grid-template-columns:1fr}.proposal-columns.moments{gap:5px}.proposal-rooms{gap:18px}.proposal-rooms p,.proposal-columns.moments p{max-width:76ch}}
 @media(max-width:750px){.proposal .detail-hero{padding-bottom:0}.proposal h1{font-size:clamp(42px,9.5vw,68px)}.proposal p{font-size:15px;line-height:1.8}.proposal .proposal-tagline{font-size:24px}.proposal .proposal-status{font-size:11px}.proposal h3{font-size:20px}.proposal-section{margin:47px 0}.proposal-section-heading{gap:12px;margin-bottom:22px}.proposal-columns,.wand-actions{grid-template-columns:1fr;gap:12px}.proposal-media{margin:25px 0 35px}.proposal-contents{gap:0 18px;margin-bottom:45px}.proposal-contents a{font-size:11px}.proposal-table{font-size:13px;line-height:1.65}.proposal-table th,.proposal-table td{padding:12px 10px}.conversation-excerpt{padding:19px}.proposal .conversation-excerpt p{font-size:14px}.proposal-media figcaption{font-size:10px;gap:4px}.proposal-introduction{margin-top:40px}}
 
